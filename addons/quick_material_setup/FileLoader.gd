@@ -23,9 +23,15 @@ func _on_FileDialog_Mat_files_selected(paths):
 
 	else:
 		var lastSlash = paths[0].find_last("/")
-#		var cutPart = element0.substr(strip)
 		var text = paths[0].rstrip(paths[0].substr(lastSlash+1))
 
 		get_node("LoadPath").set_text(text + " [Multiple]")
 #		multiMode = true
 
+
+#	In cas the user wants to manually paste in a path
+func _on_LoadPath_text_changed(path):
+	print("Selected files: ", path)
+	var pathArray = []
+	pathArray.append(path)
+	get_node(MatModifier).currentResourcePath = pathArray
