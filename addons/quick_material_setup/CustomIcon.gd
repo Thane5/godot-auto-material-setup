@@ -8,6 +8,7 @@ export(String) var customIcon
 func _enter_tree():
 	icon = get_icon(customIcon, 'EditorIcons')
 	set_button_icon(icon)
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 #func _process(delta):
 #	pass
