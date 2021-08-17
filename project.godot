@@ -10,7 +10,7 @@ config_version=4
 
 [application]
 
-config/name="godot-quick-material-setup"
+config/name="Quick Material Setup"
 run/main_scene="res://addons/quick_material_setup/QuickMaterialSetup_Dock.tscn"
 config/icon="res://icon.png"
 
