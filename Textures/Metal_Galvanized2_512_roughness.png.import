@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/icon.png-487276ed1e3a0c39cad0279d744ee560.s3tc.stex"
-path.etc2="res://.import/icon.png-487276ed1e3a0c39cad0279d744ee560.etc2.stex"
+path.s3tc="res://.import/Metal_Galvanized2_512_roughness.png-a69005e8b6b2ba18e77820b00d38535c.s3tc.stex"
+path.etc2="res://.import/Metal_Galvanized2_512_roughness.png-a69005e8b6b2ba18e77820b00d38535c.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://icon.png"
-dest_files=[ "res://.import/icon.png-487276ed1e3a0c39cad0279d744ee560.s3tc.stex", "res://.import/icon.png-487276ed1e3a0c39cad0279d744ee560.etc2.stex" ]
+source_file="res://Textures/Metal_Galvanized2_512_roughness.png"
+dest_files=[ "res://.import/Metal_Galvanized2_512_roughness.png-a69005e8b6b2ba18e77820b00d38535c.s3tc.stex", "res://.import/Metal_Galvanized2_512_roughness.png-a69005e8b6b2ba18e77820b00d38535c.etc2.stex" ]
 
 [params]
 
@@ -25,7 +25,7 @@ flags/repeat=true
 flags/filter=true
 flags/mipmaps=true
 flags/anisotropic=false
-flags/srgb=1
+flags/srgb=2
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false

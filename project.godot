@@ -12,7 +12,6 @@ config_version=4
 
 config/name="Quick Material Setup"
 run/main_scene="res://addons/quick_material_setup/QuickMaterialSetup_Dock.tscn"
-config/icon="res://icon.png"
 
 [editor_plugins]
 
