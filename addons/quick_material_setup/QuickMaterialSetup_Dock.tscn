@@ -178,9 +178,48 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="UseTemplate Area" type="HBoxContainer" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings"]
+[node name="AutoAssing Area" type="HBoxContainer" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings"]
 margin_right = 264.0
 margin_bottom = 24.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label4" type="Label" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/AutoAssing Area"]
+margin_right = 130.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 0, 20 )
+hint_tooltip = "Do not try to match texture channels, just create one material per albedo texture"
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 5
+text = "Auto-assign maps"
+valign = 1
+
+[node name="AutoAssign_Checkbox" type="CheckBox" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/AutoAssing Area"]
+margin_left = 134.0
+margin_right = 264.0
+margin_bottom = 24.0
+hint_tooltip = "On: Assign textures to their material channel
+Off: Simply create a new material per texture, and assign textures  to albedo"
+size_flags_horizontal = 3
+pressed = true
+text = "On"
+
+[node name="Panel" type="Panel" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/AutoAssing Area/AutoAssign_Checkbox"]
+self_modulate = Color( 0, 0, 0, 0.156863 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="UseTemplate Area" type="HBoxContainer" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings"]
+margin_top = 28.0
+margin_right = 264.0
+margin_bottom = 52.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -214,10 +253,9 @@ __meta__ = {
 }
 
 [node name="Template Path Area" type="HBoxContainer" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings"]
-visible = false
-margin_top = 28.0
+margin_top = 56.0
 margin_right = 264.0
-margin_bottom = 50.0
+margin_bottom = 78.0
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -259,59 +297,10 @@ __meta__ = {
 }
 customIcon = "Folder"
 
-[node name="AutoAssing Area" type="HBoxContainer" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings"]
-margin_top = 28.0
-margin_right = 264.0
-margin_bottom = 52.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label4" type="Label" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/AutoAssing Area"]
-margin_right = 130.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 0, 20 )
-hint_tooltip = "Do not try to match texture channels, just create one material per albedo texture"
-mouse_filter = 1
-size_flags_horizontal = 3
-size_flags_vertical = 5
-text = "Auto-assign maps"
-valign = 1
-
-[node name="CheckButton" type="CheckButton" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/AutoAssing Area"]
-visible = false
-margin_left = 160.0
-margin_right = 236.0
-margin_bottom = 40.0
-hint_tooltip = "Do not try to match texture channels, just create one material per albedo texture"
-pressed = true
-align = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CheckBox" type="CheckBox" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/AutoAssing Area"]
-margin_left = 134.0
-margin_right = 264.0
-margin_bottom = 24.0
-size_flags_horizontal = 3
-pressed = true
-text = "On"
-
-[node name="Panel" type="Panel" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/AutoAssing Area/CheckBox"]
-self_modulate = Color( 0, 0, 0, 0.156863 )
-show_behind_parent = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="UseColorChannels" type="HBoxContainer" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings"]
-margin_top = 56.0
+margin_top = 82.0
 margin_right = 264.0
-margin_bottom = 80.0
+margin_bottom = 106.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -327,27 +316,14 @@ size_flags_vertical = 5
 text = "Use color channels"
 valign = 1
 
-[node name="CheckButton" type="CheckButton" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/UseColorChannels"]
-visible = false
-margin_left = 160.0
-margin_right = 236.0
-margin_bottom = 40.0
-hint_tooltip = "Do not try to match texture channels, just create one material per albedo texture"
-pressed = true
-align = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="CheckBox" type="CheckBox" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/UseColorChannels"]
+[node name="UseColorChannel_Checkbox" type="CheckBox" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/UseColorChannels"]
 margin_left = 134.0
 margin_right = 264.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
-pressed = true
 text = "On"
 
-[node name="Panel" type="Panel" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/UseColorChannels/CheckBox"]
+[node name="Panel" type="Panel" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/UseColorChannels/UseColorChannel_Checkbox"]
 self_modulate = Color( 0, 0, 0, 0.156863 )
 show_behind_parent = true
 anchor_right = 1.0
@@ -357,21 +333,25 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings"]
-margin_top = 84.0
+[node name="ColorChannel_Area" type="VBoxContainer" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings"]
+margin_top = 110.0
 margin_right = 264.0
-margin_bottom = 104.0
+margin_bottom = 154.0
+
+[node name="Metallic Area" type="HBoxContainer" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/ColorChannel_Area"]
+margin_right = 264.0
+margin_bottom = 20.0
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/HBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/ColorChannel_Area/Metallic Area"]
 margin_right = 85.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 size_flags_vertical = 5
-text = "Roughness "
+text = "Metallic"
 valign = 1
 
-[node name="LineEdit" type="LineEdit" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/HBoxContainer"]
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/ColorChannel_Area/Metallic Area"]
 margin_left = 89.0
 margin_right = 174.0
 margin_bottom = 20.0
@@ -380,16 +360,77 @@ size_flags_vertical = 3
 custom_styles/read_only = ExtResource( 6 )
 custom_styles/focus = ExtResource( 6 )
 custom_styles/normal = ExtResource( 6 )
+placeholder_text = "_metal"
 
-[node name="OptionButton" type="OptionButton" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/HBoxContainer"]
+[node name="OptionButton" type="OptionButton" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/ColorChannel_Area/Metallic Area"]
 margin_left = 178.0
 margin_right = 264.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 text = "Red"
+flat = true
 items = [ "Red", null, false, 0, null, "Green", null, false, 1, null, "Blue", null, false, 2, null, "Alpha", null, false, 3, null, "Grey", null, false, 4, null ]
 selected = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel2" type="Panel" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/ColorChannel_Area/Metallic Area/OptionButton"]
+self_modulate = Color( 0, 0, 0, 0.156863 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Roughness Area" type="HBoxContainer" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/ColorChannel_Area"]
+margin_top = 24.0
+margin_right = 264.0
+margin_bottom = 44.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/ColorChannel_Area/Roughness Area"]
+margin_right = 85.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 5
+text = "Roughness "
+valign = 1
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/ColorChannel_Area/Roughness Area"]
+margin_left = 89.0
+margin_right = 174.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/read_only = ExtResource( 6 )
+custom_styles/focus = ExtResource( 6 )
+custom_styles/normal = ExtResource( 6 )
+placeholder_text = "_roughness"
+
+[node name="OptionButton" type="OptionButton" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/ColorChannel_Area/Roughness Area"]
+margin_left = 178.0
+margin_right = 264.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Red"
+flat = true
+items = [ "Red", null, false, 0, null, "Green", null, false, 1, null, "Blue", null, false, 2, null, "Alpha", null, false, 3, null, "Grey", null, false, 4, null ]
+selected = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Panel2" type="Panel" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/ColorChannel_Area/Roughness Area/OptionButton"]
+self_modulate = Color( 0, 0, 0, 0.156863 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -409,8 +450,9 @@ __meta__ = {
 [connection signal="file_selected" from="FileDialog TemplateMat" to="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/Template Path Area" method="_on_FileDialog_TemplateMat_file_selected"]
 [connection signal="text_changed" from="VBoxContainer/Texture Path Area/LoadPath" to="VBoxContainer/Texture Path Area" method="_on_LoadPath_text_changed"]
 [connection signal="pressed" from="VBoxContainer/Texture Path Area/OpenButton" to="VBoxContainer/Texture Path Area" method="_on_OpenButton_pressed"]
+[connection signal="toggled" from="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/AutoAssing Area/AutoAssign_Checkbox" to="." method="_on_AutoAssign_Checkbox_toggled"]
 [connection signal="toggled" from="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/UseTemplate Area/UseTemplate_Button" to="." method="_on_UseTemplate_Button_toggled"]
 [connection signal="text_changed" from="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/Template Path Area/LoadPath" to="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/Template Path Area" method="_on_LoadPath_text_changed"]
 [connection signal="pressed" from="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/Template Path Area/OpenButton" to="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/Template Path Area" method="_on_OpenButton_pressed"]
-[connection signal="toggled" from="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/AutoAssing Area/CheckBox" to="." method="_on_CheckBox_toggled"]
+[connection signal="toggled" from="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/UseColorChannels/UseColorChannel_Checkbox" to="." method="_on_UseColorChannel_Checkbox_toggled"]
 [connection signal="pressed" from="VBoxContainer/Create" to="." method="_on_Create_pressed"]
