@@ -51,7 +51,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="FileDialog Mat" type="FileDialog" parent="."]
+[node name="FileDialog Textures" type="FileDialog" parent="."]
 margin_right = 562.0
 margin_bottom = 412.0
 popup_exclusive = true
@@ -59,6 +59,18 @@ window_title = "Datei(en) öffnen"
 resizable = true
 mode = 1
 filters = PoolStringArray( "*.png" )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FileDialog TemplateMat" type="FileDialog" parent="."]
+margin_right = 562.0
+margin_bottom = 412.0
+popup_exclusive = true
+window_title = "Datei öffnen"
+resizable = true
+mode = 0
+filters = PoolStringArray( "*.tres", "*.material", "*.res" )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -78,7 +90,7 @@ script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-fileDialogPath = NodePath("../../FileDialog Mat")
+fileDialogPath = NodePath("../../FileDialog Textures")
 rootControl = NodePath("../..")
 
 [node name="Label" type="Label" parent="VBoxContainer/Texture Path Area"]
@@ -113,7 +125,6 @@ __meta__ = {
 customIcon = "Folder"
 
 [node name="Options Label" type="Label" parent="VBoxContainer"]
-visible = false
 margin_top = 28.0
 margin_right = 272.0
 margin_bottom = 48.0
@@ -125,7 +136,7 @@ valign = 1
 script = ExtResource( 7 )
 
 [node name="Options" type="Panel" parent="VBoxContainer"]
-margin_top = 28.0
+margin_top = 52.0
 margin_right = 272.0
 margin_bottom = 488.0
 size_flags_horizontal = 3
@@ -146,7 +157,7 @@ __meta__ = {
 
 [node name="MaterialProperties" type="MarginContainer" parent="VBoxContainer/Options/ScrollContainer"]
 margin_right = 272.0
-margin_bottom = 460.0
+margin_bottom = 436.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_right = 4
@@ -161,7 +172,7 @@ __meta__ = {
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 268.0
-margin_bottom = 456.0
+margin_bottom = 432.0
 custom_constants/separation = 4
 __meta__ = {
 "_edit_use_anchors_": false
@@ -211,7 +222,8 @@ script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
-fileDialogPath = NodePath("LoadPath")
+fileDialogPath = NodePath("../../../../../../FileDialog TemplateMat")
+rootControl = NodePath("../../../../../..")
 
 [node name="Label" type="Label" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/Template Path Area"]
 margin_top = 4.0
@@ -256,14 +268,14 @@ __meta__ = {
 }
 
 [node name="Label4" type="Label" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/AutoAssing Area"]
-margin_right = 136.0
+margin_right = 130.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 0, 20 )
 hint_tooltip = "Do not try to match texture channels, just create one material per albedo texture"
 mouse_filter = 1
 size_flags_horizontal = 3
 size_flags_vertical = 5
-text = "Auto-assign channels"
+text = "Auto-assign maps"
 valign = 1
 
 [node name="CheckButton" type="CheckButton" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/AutoAssing Area"]
@@ -279,10 +291,11 @@ __meta__ = {
 }
 
 [node name="CheckBox" type="CheckBox" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/AutoAssing Area"]
-margin_left = 140.0
+margin_left = 134.0
 margin_right = 264.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
+pressed = true
 text = "On"
 
 [node name="Panel" type="Panel" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/AutoAssing Area/CheckBox"]
@@ -295,10 +308,59 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings"]
+[node name="UseColorChannels" type="HBoxContainer" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings"]
 margin_top = 56.0
 margin_right = 264.0
-margin_bottom = 76.0
+margin_bottom = 80.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label4" type="Label" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/UseColorChannels"]
+margin_right = 130.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 0, 20 )
+hint_tooltip = "Do not try to match texture channels, just create one material per albedo texture"
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 5
+text = "Use color channels"
+valign = 1
+
+[node name="CheckButton" type="CheckButton" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/UseColorChannels"]
+visible = false
+margin_left = 160.0
+margin_right = 236.0
+margin_bottom = 40.0
+hint_tooltip = "Do not try to match texture channels, just create one material per albedo texture"
+pressed = true
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CheckBox" type="CheckBox" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/UseColorChannels"]
+margin_left = 134.0
+margin_right = 264.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+pressed = true
+text = "On"
+
+[node name="Panel" type="Panel" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/UseColorChannels/CheckBox"]
+self_modulate = Color( 0, 0, 0, 0.156863 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings"]
+margin_top = 84.0
+margin_right = 264.0
+margin_bottom = 104.0
 size_flags_horizontal = 3
 
 [node name="Label" type="Label" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/HBoxContainer"]
@@ -332,7 +394,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Modify" type="Button" parent="VBoxContainer"]
+[node name="Create" type="Button" parent="VBoxContainer"]
 margin_left = 78.0
 margin_top = 492.0
 margin_right = 194.0
@@ -343,10 +405,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[connection signal="files_selected" from="FileDialog Mat" to="VBoxContainer/Texture Path Area" method="_on_FileDialog_Mat_files_selected"]
+[connection signal="files_selected" from="FileDialog Textures" to="VBoxContainer/Texture Path Area" method="_on_FileDialog_Mat_files_selected"]
+[connection signal="file_selected" from="FileDialog TemplateMat" to="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/Template Path Area" method="_on_FileDialog_TemplateMat_file_selected"]
 [connection signal="text_changed" from="VBoxContainer/Texture Path Area/LoadPath" to="VBoxContainer/Texture Path Area" method="_on_LoadPath_text_changed"]
 [connection signal="pressed" from="VBoxContainer/Texture Path Area/OpenButton" to="VBoxContainer/Texture Path Area" method="_on_OpenButton_pressed"]
 [connection signal="toggled" from="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/UseTemplate Area/UseTemplate_Button" to="." method="_on_UseTemplate_Button_toggled"]
 [connection signal="text_changed" from="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/Template Path Area/LoadPath" to="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/Template Path Area" method="_on_LoadPath_text_changed"]
 [connection signal="pressed" from="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/Template Path Area/OpenButton" to="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/Template Path Area" method="_on_OpenButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/Modify" to="." method="_on_Modify_pressed"]
+[connection signal="toggled" from="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/AutoAssing Area/CheckBox" to="." method="_on_CheckBox_toggled"]
+[connection signal="pressed" from="VBoxContainer/Create" to="." method="_on_Create_pressed"]
