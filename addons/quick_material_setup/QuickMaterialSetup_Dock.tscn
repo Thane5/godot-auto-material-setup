@@ -167,9 +167,90 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AutoAssing Area" type="HBoxContainer" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings"]
+[node name="UseTemplate Area" type="HBoxContainer" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings"]
 margin_right = 264.0
 margin_bottom = 24.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label4" type="Label" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/UseTemplate Area"]
+margin_right = 144.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 0, 20 )
+hint_tooltip = "Do not try to match texture channels, just create one material per albedo texture"
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 5
+text = "Use template material"
+valign = 1
+
+[node name="UseTemplate_Button" type="CheckBox" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/UseTemplate Area"]
+margin_left = 148.0
+margin_right = 264.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+text = "On"
+
+[node name="Panel" type="Panel" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/UseTemplate Area/UseTemplate_Button"]
+self_modulate = Color( 0, 0, 0, 0.156863 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Template Path Area" type="HBoxContainer" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings"]
+visible = false
+margin_top = 28.0
+margin_right = 264.0
+margin_bottom = 50.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+fileDialogPath = NodePath("LoadPath")
+
+[node name="Label" type="Label" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/Template Path Area"]
+margin_top = 4.0
+margin_right = 60.0
+margin_bottom = 18.0
+text = "Template"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LoadPath" type="LineEdit" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/Template Path Area"]
+margin_left = 64.0
+margin_right = 232.0
+margin_bottom = 22.0
+hint_tooltip = "This material will serve as a template for all new materials"
+size_flags_horizontal = 3
+custom_styles/read_only = ExtResource( 6 )
+custom_styles/focus = ExtResource( 6 )
+custom_styles/normal = ExtResource( 6 )
+placeholder_text = " Select a material"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OpenButton" type="Button" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/Template Path Area"]
+margin_left = 236.0
+margin_right = 264.0
+margin_bottom = 22.0
+icon = SubResource( 2 )
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+customIcon = "Folder"
+
+[node name="AutoAssing Area" type="HBoxContainer" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings"]
+margin_top = 28.0
+margin_right = 264.0
+margin_bottom = 52.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -214,86 +295,42 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="UseTemplate Area" type="HBoxContainer" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings"]
-margin_top = 28.0
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings"]
+margin_top = 56.0
 margin_right = 264.0
-margin_bottom = 52.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
+margin_bottom = 76.0
+size_flags_horizontal = 3
 
-[node name="Label4" type="Label" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/UseTemplate Area"]
-margin_right = 144.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 0, 20 )
-hint_tooltip = "Do not try to match texture channels, just create one material per albedo texture"
-mouse_filter = 1
+[node name="Label" type="Label" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/HBoxContainer"]
+margin_right = 85.0
+margin_bottom = 20.0
 size_flags_horizontal = 3
 size_flags_vertical = 5
-text = "Use template material"
+text = "Roughness "
 valign = 1
 
-[node name="UseTemplate_Button" type="CheckBox" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/UseTemplate Area"]
-margin_left = 148.0
-margin_right = 264.0
-margin_bottom = 24.0
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/HBoxContainer"]
+margin_left = 89.0
+margin_right = 174.0
+margin_bottom = 20.0
 size_flags_horizontal = 3
-text = "On"
-
-[node name="Panel" type="Panel" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/UseTemplate Area/UseTemplate_Button"]
-self_modulate = Color( 0, 0, 0, 0.156863 )
-show_behind_parent = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Template Path Area" type="HBoxContainer" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings"]
-visible = false
-margin_top = 64.0
-margin_right = 264.0
-margin_bottom = 86.0
-script = ExtResource( 5 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-fileDialogPath = NodePath("LoadPath")
-
-[node name="Label" type="Label" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/Template Path Area"]
-margin_top = 4.0
-margin_right = 60.0
-margin_bottom = 18.0
-text = "Template"
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="LoadPath" type="LineEdit" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/Template Path Area"]
-margin_left = 64.0
-margin_right = 232.0
-margin_bottom = 22.0
-hint_tooltip = "This material will serve as a template for all new materials"
-size_flags_horizontal = 3
+size_flags_vertical = 3
 custom_styles/read_only = ExtResource( 6 )
 custom_styles/focus = ExtResource( 6 )
 custom_styles/normal = ExtResource( 6 )
-placeholder_text = " Select a material"
-__meta__ = {
-"_edit_use_anchors_": false
-}
 
-[node name="OpenButton" type="Button" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/Template Path Area"]
-margin_left = 236.0
+[node name="OptionButton" type="OptionButton" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/HBoxContainer"]
+margin_left = 178.0
 margin_right = 264.0
-margin_bottom = 22.0
-icon = SubResource( 2 )
-script = ExtResource( 3 )
+margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Red"
+items = [ "Red", null, false, 0, null, "Green", null, false, 1, null, "Blue", null, false, 2, null, "Alpha", null, false, 3, null, "Grey", null, false, 4, null ]
+selected = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
-customIcon = "Folder"
 
 [node name="Modify" type="Button" parent="VBoxContainer"]
 margin_left = 78.0
