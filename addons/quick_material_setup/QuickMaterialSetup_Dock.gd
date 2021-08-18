@@ -8,6 +8,7 @@ const ALBEDO_SUFFIX_ARRAY = ["color", "col", "diffuse","diff", "albedo", "base"]
 const NORMAL_SUFFIX_ARRAY = ["normal", "nor", "nrm", "norm", "bump", "bmp"]
 const METALLIC_SUFFIX_ARRAY = ["metallic", "metalness", "metal", "mtl"]
 const ROUGHNESS_SUFFIX_ARRAY = ["roughness", "rough", "rgh", "gloss", "glossy", "glossiness"]
+const EMISSION_SUFFIX_ARRAY = ["emission", "em"]
 
 var currentResourcePaths
 
@@ -52,6 +53,7 @@ func _on_Modify_pressed():
 		suffixMaster.append_array(NORMAL_SUFFIX_ARRAY)
 		suffixMaster.append_array(METALLIC_SUFFIX_ARRAY)
 		suffixMaster.append_array(ROUGHNESS_SUFFIX_ARRAY)
+		suffixMaster.append_array(EMISSION_SUFFIX_ARRAY)
 	
 		var matName
 		var useAsAlbedo = false # If this is true, it will skipp going through other suffixes
@@ -103,6 +105,11 @@ func _on_Modify_pressed():
 			for roughnessSuffix in ROUGHNESS_SUFFIX_ARRAY:
 				if texName.ends_with(roughnessSuffix):
 					currentMat.roughness_texture = load(path)
+					
+			for emissionSuffix in EMISSION_SUFFIX_ARRAY:
+				if texName.ends_with(emissionSuffix):
+					currentMat.emission_enabled = true
+					currentMat.emission_texture = load(path)
 
 		# finally, write the material to disk (happens for each texture but eh...
 		ResourceSaver.save(str(matPath), currentMat)
