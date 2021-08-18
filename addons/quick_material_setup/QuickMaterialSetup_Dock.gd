@@ -4,11 +4,11 @@ extends Control
 
 const SCALE_SUFFIX_ARRAY = ["_1K", "_2K", "_3K", "_4K", "_6K", "_8K", "_1k", "_2k", "_3k", "_4k", "_6k", "_8k"]
 
-const ALBEDO_SUFFIX_ARRAY = ["color", "col", "diffuse","diff", "albedo", "base"]
-const NORMAL_SUFFIX_ARRAY = ["normal", "nor", "nrm", "norm", "bump", "bmp"]
-const METALLIC_SUFFIX_ARRAY = ["metallic", "metalness", "metal", "mtl"]
-const ROUGHNESS_SUFFIX_ARRAY = ["roughness", "rough", "rgh", "gloss", "glossy", "glossiness"]
-const EMISSION_SUFFIX_ARRAY = ["emission", "em"]
+const ALBEDO_SUFFIX_ARRAY = ["_color", "_col", "_diffuse","_diff", "_albedo", "_base"]
+const NORMAL_SUFFIX_ARRAY = ["_normal", "_nor", "_nrm", "_norm", "_bump", "_bmp"]
+const METALLIC_SUFFIX_ARRAY = ["_metallic", "_metalness", "_metal", "_mtl"]
+const ROUGHNESS_SUFFIX_ARRAY = ["_roughness", "_rough", "_rgh", "_gloss", "_glossy", "_glossiness"]
+const EMISSION_SUFFIX_ARRAY = ["_emission","_emissive", "_em"]
 
 var currentResourcePaths
 var autoAssing = true
@@ -99,7 +99,7 @@ func _on_Create_pressed():
 			# if no suffix matches, simply use the texture as albedo
 			for anySuffix in suffixMaster:
 				if texName.ends_with(anySuffix):
-					matName = texName.trim_suffix(texName.substr(texName.find_last("_")))
+					matName = texName.trim_suffix(anySuffix)
 					useAsAlbedo = false
 					break
 				else:
