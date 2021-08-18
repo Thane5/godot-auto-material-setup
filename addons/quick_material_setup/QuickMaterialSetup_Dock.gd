@@ -11,13 +11,32 @@ const ROUGHNESS_SUFFIX_ARRAY = ["roughness", "rough", "rgh", "gloss", "glossy", 
 const EMISSION_SUFFIX_ARRAY = ["emission", "em"]
 
 var currentResourcePaths
+var autoAssing = true
+var useTemplateMat = false
+var templateMatPath
+
 
 func _on_UseTemplate_Button_toggled(button_pressed):
 	var templatePathArea = get_node("VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/Template Path Area")
 	templatePathArea.set_visible(button_pressed)
-
+	useTemplateMat = button_pressed
+	print("set useTemplateMat to ", button_pressed)
 	
-func _on_Modify_pressed():
+
+func _on_CheckBox_toggled(button_pressed):
+	autoAssing = button_pressed
+	print("set autoAssign to ", button_pressed)
+
+
+func _on_Create_pressed():
+	
+	var currentMat
+	if useTemplateMat == true:
+		currentMat = load(templateMatPath).duplicate()
+	else:
+		currentMat = SpatialMaterial.new()
+
+
 
 
 	for path in currentResourcePaths:
@@ -34,85 +53,104 @@ func _on_Modify_pressed():
 		texName.erase(texName.find_last("."), texName.length()-texName.find_last("."))
 		
 		
-		#	Remove stupid scale suffixes because they would mess with my channel suffix detection
-		for scaleSuffix in SCALE_SUFFIX_ARRAY:
-			if texName.ends_with(scaleSuffix) == true:
-				texName = texName.trim_suffix(scaleSuffix)
-				print("removed suffix ", scaleSuffix, " from Texture ", texName)
-				break
-		# Remove the even dumber _gl suffix because screw that
-		if texName.ends_with("_gl") == true:
-			texName = texName.trim_suffix("_gl")
-			print("also removed _gl suffix from ", texName)
+		if autoAssing == true:
+		
+			#	Remove stupid scale suffixes because they would mess with my channel suffix detection
+			for scaleSuffix in SCALE_SUFFIX_ARRAY:
+				if texName.ends_with(scaleSuffix) == true:
+					texName = texName.trim_suffix(scaleSuffix)
+					print("removed suffix ", scaleSuffix, " from Texture ", texName)
+					break
+			# Remove the even dumber _gl suffix because screw that
+			if texName.ends_with("_gl") == true:
+				texName = texName.trim_suffix("_gl")
+				print("also removed _gl suffix from ", texName)
+				
+				
+			
+			# just an array containing all suffixes
+			var suffixMaster = []
+			suffixMaster.append_array(ALBEDO_SUFFIX_ARRAY)
+			suffixMaster.append_array(NORMAL_SUFFIX_ARRAY)
+			suffixMaster.append_array(METALLIC_SUFFIX_ARRAY)
+			suffixMaster.append_array(ROUGHNESS_SUFFIX_ARRAY)
+			suffixMaster.append_array(EMISSION_SUFFIX_ARRAY)
+		
+			var matName
+			var useAsAlbedo = false # If this is true, it will skipp going through other suffixes
+									# and directly use it as the albedo
+			
+			# If a channel suffix is found, remove it from the string and use it as matName
+			# if no suffix matches, simply use the texture as albedo
+			for anySuffix in suffixMaster:
+				if texName.ends_with(anySuffix):
+					matName = texName.trim_suffix(texName.substr(texName.find_last("_")))
+					useAsAlbedo = false
+					break
+				else:
+					matName = texName
+					useAsAlbedo = true
 			
 			
-		
-		# just an array containing all suffixes
-		var suffixMaster = []
-		suffixMaster.append_array(ALBEDO_SUFFIX_ARRAY)
-		suffixMaster.append_array(NORMAL_SUFFIX_ARRAY)
-		suffixMaster.append_array(METALLIC_SUFFIX_ARRAY)
-		suffixMaster.append_array(ROUGHNESS_SUFFIX_ARRAY)
-		suffixMaster.append_array(EMISSION_SUFFIX_ARRAY)
-	
-		var matName
-		var useAsAlbedo = false # If this is true, it will skipp going through other suffixes
-								# and directly use it as the albedo
-		
-		# If a channel suffix is found, remove it from the string and use it as matName
-		# if no suffix matches, simply use the texture as albedo
-		for anySuffix in suffixMaster:
-			if texName.ends_with(anySuffix):
-				matName = texName.trim_suffix(texName.substr(texName.find_last("_")))
-				useAsAlbedo = false
-				break
+			# this will be the path of the new material file
+			var matPath = (workingDir + matName + ".tres")
+			
+			# first check if the file already exists, otherwise load it in
+			var dummyFile =  File.new() # why do we have to create these??! 
+			#var currentMat # The loaded material instance
+			
+			if dummyFile.file_exists(matPath) == true:
+				currentMat = load(matPath)
 			else:
-				matName = texName
-				useAsAlbedo = true
-		
-		
-		# this will be the path of the new material file
-		var matPath = (workingDir + matName + ".tres")
-		
-		# first check if the file already exists, otherwise load it in
-		var dummyFile =  File.new() # why do we have to create these??! 
-		var currentMat # The loaded material instance
-		
-		if dummyFile.file_exists(matPath) == true:
-			currentMat = load(matPath)
-		else:
-			currentMat = SpatialMaterial.new()
-		
-		# Either directly assign it to albedo, or assign it based on the suffix in texName
-		if useAsAlbedo == true:
-			currentMat.albedo_texture = load(path)
-			print("no suffix found, using ", path, " as albedo")
+				#currentMat = SpatialMaterial.new()
+				pass
+			# Either directly assign it to albedo, or assign it based on the suffix in texName
+			if useAsAlbedo == true:
+				currentMat.albedo_texture = load(path)
+				print("no suffix found, using ", path, " as albedo")
+				
+			else:
+				for albedoSuffix in ALBEDO_SUFFIX_ARRAY:
+					if texName.ends_with(albedoSuffix):
+						currentMat.albedo_texture = load(path)
+
+				for normalSuffix in NORMAL_SUFFIX_ARRAY:
+					if texName.ends_with(normalSuffix):
+						currentMat.normal_enabled = true
+						currentMat.normal_texture = load(path)
+
+				for metallicSuffix in METALLIC_SUFFIX_ARRAY:
+					if texName.ends_with(metallicSuffix):
+						currentMat.metallic_texture = load(path)
+
+				for roughnessSuffix in ROUGHNESS_SUFFIX_ARRAY:
+					if texName.ends_with(roughnessSuffix):
+						currentMat.roughness_texture = load(path)
+						
+				for emissionSuffix in EMISSION_SUFFIX_ARRAY:
+					if texName.ends_with(emissionSuffix):
+						currentMat.emission_enabled = true
+						currentMat.emission_texture = load(path)
+
+			# finally, write the material to disk (happens for each texture but eh...
+			ResourceSaver.save(str(matPath), currentMat)
 			
+		# if autoAssing == false: 
+		# Just take all textures and assign them to albedo in their own, new material 
 		else:
-			for albedoSuffix in ALBEDO_SUFFIX_ARRAY:
-				if texName.ends_with(albedoSuffix):
-					currentMat.albedo_texture = load(path)
+			var matPath = (workingDir + texName + ".tres")
+			var dummyFile =  File.new() # why do we have to create these??! 
+			#var currentMat # The loaded material instance
+			
+			if dummyFile.file_exists(matPath) == true:
+				currentMat = load(matPath)
+			else:
+				#currentMat = SpatialMaterial.new()
+				pass
+			currentMat.albedo_texture = load(path)
+			ResourceSaver.save(str(matPath), currentMat)
 
-			for normalSuffix in NORMAL_SUFFIX_ARRAY:
-				if texName.ends_with(normalSuffix):
-					currentMat.normal_enabled = true
-					currentMat.normal_texture = load(path)
 
-			for metallicSuffix in METALLIC_SUFFIX_ARRAY:
-				if texName.ends_with(metallicSuffix):
-					currentMat.metallic_texture = load(path)
-
-			for roughnessSuffix in ROUGHNESS_SUFFIX_ARRAY:
-				if texName.ends_with(roughnessSuffix):
-					currentMat.roughness_texture = load(path)
-					
-			for emissionSuffix in EMISSION_SUFFIX_ARRAY:
-				if texName.ends_with(emissionSuffix):
-					currentMat.emission_enabled = true
-					currentMat.emission_texture = load(path)
-
-		# finally, write the material to disk (happens for each texture but eh...
-		ResourceSaver.save(str(matPath), currentMat)
 
 
 
