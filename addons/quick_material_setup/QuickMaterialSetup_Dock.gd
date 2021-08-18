@@ -4,24 +4,14 @@ extends Control
 
 const SCALE_SUFFIX_ARRAY = ["_1K", "_2K", "_3K", "_4K", "_6K", "_8K", "_1k", "_2k", "_3k", "_4k", "_6k", "_8k"]
 
-const ALBEDO_SUFFIX_ARRAY = ["color", "col", "albedo", "diff"]
-const NORMAL_SUFFIX_ARRAY = ["normal", "nor", "nrm"]
-const METALLIC_SUFFIX_ARRAY = ["metal", "metallic"]
-const ROUGHNESS_SUFFIX_ARRAY = ["roughness", "rough"]
-
-
+const ALBEDO_SUFFIX_ARRAY = ["color", "col", "diffuse","diff", "albedo", "base"]
+const NORMAL_SUFFIX_ARRAY = ["normal", "nor", "nrm", "norm", "bump", "bmp"]
+const METALLIC_SUFFIX_ARRAY = ["metallic", "metalness", "metal", "mtl"]
+const ROUGHNESS_SUFFIX_ARRAY = ["roughness", "rough", "rgh", "gloss", "glossy", "glossiness"]
 
 var currentResourcePaths
 var currentMat
 
-
-
-
-#concept Dict
-var icon = {
-	"albedo": "res://icon_albedo.png",
-	"roughness": "res://icon_roughness.png"
-}
 
 
 func _on_UseTemplate_Button_toggled(button_pressed):
@@ -60,6 +50,7 @@ func _on_Modify_pressed():
 			
 		print(texName)
 		
+		# just an array containing all suffixes
 		var suffixMaster = []
 		suffixMaster.append_array(ALBEDO_SUFFIX_ARRAY)
 		suffixMaster.append_array(NORMAL_SUFFIX_ARRAY)
@@ -67,8 +58,10 @@ func _on_Modify_pressed():
 		suffixMaster.append_array(ROUGHNESS_SUFFIX_ARRAY)
 	
 		var matName
-		var useAsAlbedo = false
+		var useAsAlbedo = false # If this is true, it will skipp going through other suffixes
+								# and directly use it as the albedo
 		
+		# if no suffix matches, simply use the texture as albedo
 		for anySuffix in suffixMaster:
 			if texName.ends_with(anySuffix):
 				matName = texName.trim_suffix(texName.substr(texName.find_last("_")))
@@ -115,7 +108,9 @@ func _on_Modify_pressed():
 		# finally, write the material to disk (happens for each texture but eh...
 		ResourceSaver.save(str(matPath), currentMat)
 
-		
+
+
+
 
 
 	#	This converts the path array to actual an array of actual resources 
