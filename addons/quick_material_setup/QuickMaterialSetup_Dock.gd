@@ -14,7 +14,16 @@ var currentResourcePaths
 var autoAssing = true
 var useTemplateMat = false
 var templateMatPath
+var useColorChannels = false
 
+func _enter_tree():
+	var templatePathArea = get_node("VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/Template Path Area")
+	var useTemplateButton = get_node("VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/UseTemplate Area/UseTemplate_Button")
+	templatePathArea.set_visible(useTemplateButton.is_pressed())
+	
+	var colorChannelArea = get_node("VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/ColorChannel_Area")
+	var useColorChannelsCheckbox = get_node("VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/UseColorChannels/UseColorChannel_Checkbox")
+	colorChannelArea.set_visible(useColorChannelsCheckbox.is_pressed())
 
 func _on_UseTemplate_Button_toggled(button_pressed):
 	var templatePathArea = get_node("VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/Template Path Area")
@@ -23,10 +32,16 @@ func _on_UseTemplate_Button_toggled(button_pressed):
 	print("set useTemplateMat to ", button_pressed)
 	
 
-func _on_CheckBox_toggled(button_pressed):
+func _on_AutoAssign_Checkbox_toggled(button_pressed):
 	autoAssing = button_pressed
 	print("set autoAssign to ", button_pressed)
+	
 
+func _on_UseColorChannel_Checkbox_toggled(button_pressed):
+	var colorChannelArea = get_node("VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/ColorChannel_Area")
+	colorChannelArea.set_visible(button_pressed)
+	colorChannelArea = button_pressed
+	print("set colorChannelArea to ", button_pressed)
 
 func _on_Create_pressed():
 	
@@ -149,6 +164,11 @@ func _on_Create_pressed():
 				pass
 			currentMat.albedo_texture = load(path)
 			ResourceSaver.save(str(matPath), currentMat)
+
+
+
+
+
 
 
 
