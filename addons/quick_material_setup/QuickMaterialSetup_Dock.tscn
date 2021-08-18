@@ -253,6 +253,7 @@ __meta__ = {
 }
 
 [node name="Template Path Area" type="HBoxContainer" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings"]
+visible = false
 margin_top = 56.0
 margin_right = 264.0
 margin_bottom = 78.0
@@ -298,9 +299,9 @@ __meta__ = {
 customIcon = "Folder"
 
 [node name="UseColorChannels" type="HBoxContainer" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings"]
-margin_top = 82.0
+margin_top = 56.0
 margin_right = 264.0
-margin_bottom = 106.0
+margin_bottom = 80.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -334,24 +335,24 @@ __meta__ = {
 }
 
 [node name="ColorChannel_Area" type="VBoxContainer" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings"]
-margin_top = 110.0
+margin_top = 84.0
 margin_right = 264.0
-margin_bottom = 154.0
+margin_bottom = 152.0
 
-[node name="Metallic Area" type="HBoxContainer" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/ColorChannel_Area"]
+[node name="AO Area" type="HBoxContainer" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/ColorChannel_Area"]
 margin_right = 264.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/ColorChannel_Area/Metallic Area"]
+[node name="Label" type="Label" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/ColorChannel_Area/AO Area"]
 margin_right = 85.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 size_flags_vertical = 5
-text = "Metallic"
+text = "AO"
 valign = 1
 
-[node name="LineEdit" type="LineEdit" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/ColorChannel_Area/Metallic Area"]
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/ColorChannel_Area/AO Area"]
 margin_left = 89.0
 margin_right = 174.0
 margin_bottom = 20.0
@@ -360,9 +361,9 @@ size_flags_vertical = 3
 custom_styles/read_only = ExtResource( 6 )
 custom_styles/focus = ExtResource( 6 )
 custom_styles/normal = ExtResource( 6 )
-placeholder_text = "_metal"
+placeholder_text = "_ao"
 
-[node name="OptionButton" type="OptionButton" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/ColorChannel_Area/Metallic Area"]
+[node name="OptionButton" type="OptionButton" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/ColorChannel_Area/AO Area"]
 margin_left = 178.0
 margin_right = 264.0
 margin_bottom = 20.0
@@ -373,10 +374,11 @@ flat = true
 items = [ "Red", null, false, 0, null, "Green", null, false, 1, null, "Blue", null, false, 2, null, "Alpha", null, false, 3, null, "Grey", null, false, 4, null ]
 selected = 0
 __meta__ = {
+"_edit_group_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Panel2" type="Panel" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/ColorChannel_Area/Metallic Area/OptionButton"]
+[node name="Panel2" type="Panel" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/ColorChannel_Area/AO Area/OptionButton"]
 self_modulate = Color( 0, 0, 0, 0.156863 )
 show_behind_parent = true
 anchor_right = 1.0
@@ -417,15 +419,66 @@ margin_right = 264.0
 margin_bottom = 20.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-text = "Red"
+text = "Green"
 flat = true
 items = [ "Red", null, false, 0, null, "Green", null, false, 1, null, "Blue", null, false, 2, null, "Alpha", null, false, 3, null, "Grey", null, false, 4, null ]
-selected = 0
+selected = 1
 __meta__ = {
+"_edit_group_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="Panel2" type="Panel" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/ColorChannel_Area/Roughness Area/OptionButton"]
+self_modulate = Color( 0, 0, 0, 0.156863 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Metallic Area" type="HBoxContainer" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/ColorChannel_Area"]
+margin_top = 48.0
+margin_right = 264.0
+margin_bottom = 68.0
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/ColorChannel_Area/Metallic Area"]
+margin_right = 85.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 5
+text = "Metallic"
+valign = 1
+
+[node name="LineEdit" type="LineEdit" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/ColorChannel_Area/Metallic Area"]
+margin_left = 89.0
+margin_right = 174.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/read_only = ExtResource( 6 )
+custom_styles/focus = ExtResource( 6 )
+custom_styles/normal = ExtResource( 6 )
+placeholder_text = "_metal"
+
+[node name="OptionButton" type="OptionButton" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/ColorChannel_Area/Metallic Area"]
+margin_left = 178.0
+margin_right = 264.0
+margin_bottom = 20.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Blue"
+flat = true
+items = [ "Red", null, false, 0, null, "Green", null, false, 1, null, "Blue", null, false, 2, null, "Alpha", null, false, 3, null, "Grey", null, false, 4, null ]
+selected = 2
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Panel2" type="Panel" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/ColorChannel_Area/Metallic Area/OptionButton"]
 self_modulate = Color( 0, 0, 0, 0.156863 )
 show_behind_parent = true
 anchor_right = 1.0
