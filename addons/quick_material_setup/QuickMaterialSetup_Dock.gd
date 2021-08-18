@@ -10,9 +10,6 @@ const METALLIC_SUFFIX_ARRAY = ["metallic", "metalness", "metal", "mtl"]
 const ROUGHNESS_SUFFIX_ARRAY = ["roughness", "rough", "rgh", "gloss", "glossy", "glossiness"]
 
 var currentResourcePaths
-var currentMat
-
-
 
 func _on_UseTemplate_Button_toggled(button_pressed):
 	var templatePathArea = get_node("VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/Template Path Area")
@@ -20,7 +17,7 @@ func _on_UseTemplate_Button_toggled(button_pressed):
 
 	
 func _on_Modify_pressed():
-	
+
 
 	for path in currentResourcePaths:
 		
@@ -48,7 +45,6 @@ func _on_Modify_pressed():
 			print("also removed _gl suffix from ", texName)
 			
 			
-		print(texName)
 		
 		# just an array containing all suffixes
 		var suffixMaster = []
@@ -61,6 +57,7 @@ func _on_Modify_pressed():
 		var useAsAlbedo = false # If this is true, it will skipp going through other suffixes
 								# and directly use it as the albedo
 		
+		# If a channel suffix is found, remove it from the string and use it as matName
 		# if no suffix matches, simply use the texture as albedo
 		for anySuffix in suffixMaster:
 			if texName.ends_with(anySuffix):
@@ -75,17 +72,19 @@ func _on_Modify_pressed():
 		# this will be the path of the new material file
 		var matPath = (workingDir + matName + ".tres")
 		
+		# first check if the file already exists, otherwise load it in
 		var dummyFile =  File.new() # why do we have to create these??! 
+		var currentMat # The loaded material instance
+		
 		if dummyFile.file_exists(matPath) == true:
 			currentMat = load(matPath)
 		else:
 			currentMat = SpatialMaterial.new()
 		
-		
+		# Either directly assign it to albedo, or assign it based on the suffix in texName
 		if useAsAlbedo == true:
-			
 			currentMat.albedo_texture = load(path)
-			print("using ", path, " as albedo")
+			print("no suffix found, using ", path, " as albedo")
 			
 		else:
 			for albedoSuffix in ALBEDO_SUFFIX_ARRAY:
@@ -110,10 +109,3 @@ func _on_Modify_pressed():
 
 
 
-
-
-
-	#	This converts the path array to actual an array of actual resources 
-#	for path in currentResourcePaths:
-#		currentResources.append(load(path))
-#	print(currentResources)
