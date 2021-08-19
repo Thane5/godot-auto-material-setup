@@ -68,7 +68,7 @@ func _on_UseColorChannel_Checkbox_toggled(button_pressed):
 func _on_Create_pressed():
 	
 	var ao_suffix = get_node(ao_suffixPath).text
-	var ao_channnel = get_node(ao_channnelPath).selected
+	var ao_channel = get_node(ao_channnelPath).selected
 	var roughness_suffix = get_node(roughness_suffixPath).text
 	var roughness_channel = get_node(roughness_channelPath).selected
 	var metallic_suffix = get_node(metallic_suffixPath).text
@@ -119,8 +119,9 @@ func _on_Create_pressed():
 			
 			if useColorChannels == true:
 			
-				if texName.ends_with(ao_suffix):
-					
+				var ao_bools = [ao_suffix != "", texName.ends_with(ao_suffix)]
+				if !ao_bools.has(false): # returns true if all bools are true
+					print("using color channel ", ao_channel, " of ", texName, " for AO")
 					var matName = texName.trim_suffix(ao_suffix)
 					var matPath = (workingDir + matName + ".tres")
 					
@@ -132,14 +133,13 @@ func _on_Create_pressed():
 					
 					currentMat.ao_enabled = true
 					currentMat.ao_texture = load(path)
-					currentMat.ao_texture_channel = ao_channnel
+					currentMat.ao_texture_channel = ao_channel
 					
 					ResourceSaver.save(str(matPath), currentMat)
 					
-					
-					
-				if texName.ends_with(roughness_suffix):
-					
+				var roughness_bools = [roughness_suffix != "", texName.ends_with(roughness_suffix)]
+				if !roughness_bools.has(false):
+					print("using color channel ", roughness_channel, " of ", texName, " for Roughness")
 					var matName = texName.trim_suffix(roughness_suffix)
 					var matPath = (workingDir + matName + ".tres")
 					
@@ -154,8 +154,9 @@ func _on_Create_pressed():
 					
 					ResourceSaver.save(str(matPath), currentMat)
 
-				if texName.ends_with(metallic_suffix):
-
+				var metallic_bools = [metallic_suffix != "", texName.ends_with(metallic_suffix)]
+				if !metallic_bools.has(false):
+					print("using color channel ", metallic_channel, " of ", texName, " for Metallic")
 					var matName = texName.trim_suffix(metallic_suffix)
 					var matPath = (workingDir + matName + ".tres")
 					
@@ -208,10 +209,7 @@ func _on_Create_pressed():
 				if dummyFile.file_exists(matPath) == true:
 					currentMat = load(matPath)
 
-				
-	#			if useColorChannels == true:
-	#				if 
-					
+
 			
 				# Either directly assign it to albedo, or assign it based on the suffix in texName
 				if useAsAlbedo == true:
