@@ -1,13 +1,13 @@
 [gd_scene load_steps=14 format=2]
 
-[ext_resource path="res://addons/quick_material_setup/QuickMaterialSetup_Dock.gd" type="Script" id=1]
-[ext_resource path="res://addons/quick_material_setup/ExpandArea.gd" type="Script" id=2]
-[ext_resource path="res://addons/quick_material_setup/CustomIcon.gd" type="Script" id=3]
-[ext_resource path="res://addons/quick_material_setup/FileLoader.gd" type="Script" id=4]
-[ext_resource path="res://addons/quick_material_setup/TemplateLoader.gd" type="Script" id=5]
-[ext_resource path="res://addons/quick_material_setup/PathField.tres" type="StyleBox" id=6]
-[ext_resource path="res://addons/quick_material_setup/CustomFont.gd" type="Script" id=7]
-[ext_resource path="res://addons/quick_material_setup/Dropdown_BG.tres" type="StyleBox" id=8]
+[ext_resource path="res://addons/auto_material_setup/CustomIcon.gd" type="Script" id=1]
+[ext_resource path="res://addons/auto_material_setup/ExpandArea.gd" type="Script" id=2]
+[ext_resource path="res://addons/auto_material_setup/FileLoader.gd" type="Script" id=3]
+[ext_resource path="res://addons/auto_material_setup/MaterialSetup_Dock.gd" type="Script" id=4]
+[ext_resource path="res://addons/auto_material_setup/CustomFont.gd" type="Script" id=5]
+[ext_resource path="res://addons/auto_material_setup/TemplateLoader.gd" type="Script" id=6]
+[ext_resource path="res://addons/auto_material_setup/PathField.tres" type="StyleBox" id=7]
+[ext_resource path="res://addons/auto_material_setup/Dropdown_BG.tres" type="StyleBox" id=8]
 
 [sub_resource type="Image" id=6]
 data = {
@@ -48,7 +48,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_right = -752.0
 margin_bottom = -88.0
-script = ExtResource( 1 )
+script = ExtResource( 4 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -113,7 +113,7 @@ __meta__ = {
 margin_right = 272.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
-script = ExtResource( 4 )
+script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -145,7 +145,7 @@ margin_right = 272.0
 margin_bottom = 24.0
 icon = SubResource( 2 )
 flat = true
-script = ExtResource( 3 )
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -161,7 +161,7 @@ size_flags_vertical = 5
 custom_fonts/font = SubResource( 5 )
 text = "Options"
 valign = 1
-script = ExtResource( 7 )
+script = ExtResource( 5 )
 
 [node name="Options" type="Panel" parent="VBoxContainer"]
 margin_top = 28.0
@@ -288,7 +288,7 @@ visible = false
 margin_top = 28.0
 margin_right = 264.0
 margin_bottom = 50.0
-script = ExtResource( 5 )
+script = ExtResource( 6 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -310,9 +310,9 @@ margin_right = 232.0
 margin_bottom = 22.0
 hint_tooltip = "This material will serve as a template for all new materials"
 size_flags_horizontal = 3
-custom_styles/read_only = ExtResource( 6 )
-custom_styles/focus = ExtResource( 6 )
-custom_styles/normal = ExtResource( 6 )
+custom_styles/read_only = ExtResource( 7 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/normal = ExtResource( 7 )
 placeholder_text = " Select a material"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -323,7 +323,7 @@ margin_left = 236.0
 margin_right = 264.0
 margin_bottom = 22.0
 icon = SubResource( 2 )
-script = ExtResource( 3 )
+script = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -470,9 +470,9 @@ margin_bottom = 20.0
 hint_tooltip = "The suffix of the texture containting the AO channel"
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/read_only = ExtResource( 6 )
-custom_styles/focus = ExtResource( 6 )
-custom_styles/normal = ExtResource( 6 )
+custom_styles/read_only = ExtResource( 7 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/normal = ExtResource( 7 )
 placeholder_text = "_orm"
 
 [node name="AO Options" type="OptionButton" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/Channel Settings/ColorChannel Area/AO Area"]
@@ -521,9 +521,9 @@ margin_bottom = 20.0
 hint_tooltip = "The suffix of the texture containting the roughness channel"
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/read_only = ExtResource( 6 )
-custom_styles/focus = ExtResource( 6 )
-custom_styles/normal = ExtResource( 6 )
+custom_styles/read_only = ExtResource( 7 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/normal = ExtResource( 7 )
 placeholder_text = "_orm"
 
 [node name="Rough Options" type="OptionButton" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/Channel Settings/ColorChannel Area/Roughness Area"]
@@ -572,9 +572,9 @@ margin_bottom = 20.0
 hint_tooltip = "The suffix of the texture containting the metallic channel"
 size_flags_horizontal = 3
 size_flags_vertical = 3
-custom_styles/read_only = ExtResource( 6 )
-custom_styles/focus = ExtResource( 6 )
-custom_styles/normal = ExtResource( 6 )
+custom_styles/read_only = ExtResource( 7 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/normal = ExtResource( 7 )
 placeholder_text = "_orm"
 
 [node name="Metal Options" type="OptionButton" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/Channel Settings/ColorChannel Area/Metallic Area"]
