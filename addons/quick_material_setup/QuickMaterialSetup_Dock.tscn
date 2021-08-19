@@ -125,6 +125,7 @@ __meta__ = {
 customIcon = "Folder"
 
 [node name="Options Label" type="Label" parent="VBoxContainer"]
+visible = false
 margin_top = 28.0
 margin_right = 272.0
 margin_bottom = 48.0
@@ -136,7 +137,7 @@ valign = 1
 script = ExtResource( 7 )
 
 [node name="Options" type="Panel" parent="VBoxContainer"]
-margin_top = 52.0
+margin_top = 28.0
 margin_right = 272.0
 margin_bottom = 488.0
 size_flags_horizontal = 3
@@ -157,7 +158,7 @@ __meta__ = {
 
 [node name="MaterialProperties" type="MarginContainer" parent="VBoxContainer/Options/ScrollContainer"]
 margin_right = 272.0
-margin_bottom = 436.0
+margin_bottom = 460.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 custom_constants/margin_right = 4
@@ -172,7 +173,7 @@ __meta__ = {
 margin_left = 4.0
 margin_top = 4.0
 margin_right = 268.0
-margin_bottom = 432.0
+margin_bottom = 456.0
 custom_constants/separation = 4
 __meta__ = {
 "_edit_use_anchors_": false
