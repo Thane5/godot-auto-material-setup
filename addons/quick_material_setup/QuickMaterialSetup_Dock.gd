@@ -11,6 +11,14 @@ const ROUGHNESS_SUFFIX_ARRAY = ["_roughness", "_rough", "_rgh", "_gloss", "_glos
 const EMISSION_SUFFIX_ARRAY = ["_emission","_emissive", "_em"]
 const AO_SUFFIX_ARRAY = ["_ao", "_occlusion", "_ambientocclusion"]
 
+export(NodePath) var templatePathArea
+export(NodePath) var useTemplateButton
+export(NodePath) var colorChannelArea
+export(NodePath) var useColorChannelsCheckbox
+export(NodePath) var useColorChannelsArea
+export(NodePath) var autoAssignCheckbox
+export(NodePath) var autoAssignArea
+
 var currentResourcePaths
 var autoAssing = true
 var useTemplateMat = false
@@ -27,37 +35,28 @@ var metallic_channel = 2
 
 #	Hide/Show UI elements based on their assigned toggle button
 func _enter_tree():
-	var templatePathArea = get_node("VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/Template Path Area")
-	var useTemplateButton = get_node("VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/UseTemplate Area/UseTemplate_Button")
-	templatePathArea.set_visible(useTemplateButton.is_pressed())
-	
-	var colorChannelArea = get_node("VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/ColorChannel_Area")
-	var useColorChannelsCheckbox = get_node("VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/UseColorChannels/UseColorChannel_Checkbox")
-	colorChannelArea.set_visible(useColorChannelsCheckbox.is_pressed())
 
-	var useColorChannelsArea = get_node("VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/UseColorChannels")
-	var autoAssignArea =get_node("VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/AutoAssing Area/AutoAssign_Checkbox")
-	useColorChannelsArea.set_visible(autoAssignArea.is_pressed())
+	get_node(templatePathArea).set_visible(get_node(useTemplateButton).is_pressed())
+	
+	get_node(colorChannelArea).set_visible(get_node(useColorChannelsCheckbox).is_pressed())
+
+	get_node(useColorChannelsArea).set_visible(get_node(autoAssignCheckbox).is_pressed())
 
 func _on_UseTemplate_Button_toggled(button_pressed):
-	var templatePathArea = get_node("VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/Template Path Area")
-	templatePathArea.set_visible(button_pressed)
+	get_node(templatePathArea).set_visible(get_node(useTemplateButton).is_pressed())
 	useTemplateMat = button_pressed
-	print("set useTemplateMat to ", button_pressed)
+	print("useTemplateMat -> ", button_pressed)
 	
 
 func _on_AutoAssign_Checkbox_toggled(button_pressed):
-	var useColorChannelsArea = get_node("VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/UseColorChannels")
-	useColorChannelsArea.set_visible(button_pressed)
+	get_node(useColorChannelsArea).set_visible(button_pressed)
 	autoAssing = button_pressed
-	print("set autoAssign to ", button_pressed)
+	print("autoAssign -> ", button_pressed)
 	
 
 func _on_UseColorChannel_Checkbox_toggled(button_pressed):
-	var colorChannelArea = get_node("VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/ColorChannel_Area")
-	colorChannelArea.set_visible(button_pressed)
-	colorChannelArea = button_pressed
-	print("set colorChannelArea to ", button_pressed)
+	get_node(colorChannelArea).set_visible(get_node(useColorChannelsCheckbox).is_pressed())
+	print("colorChannelArea -> ", button_pressed)
 
 func _on_Create_pressed():
 	
