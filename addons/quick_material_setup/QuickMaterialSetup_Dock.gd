@@ -35,6 +35,10 @@ func _enter_tree():
 	var useColorChannelsCheckbox = get_node("VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/UseColorChannels/UseColorChannel_Checkbox")
 	colorChannelArea.set_visible(useColorChannelsCheckbox.is_pressed())
 
+	var useColorChannelsArea = get_node("VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/UseColorChannels")
+	var autoAssignArea =get_node("VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/AutoAssing Area")
+	useColorChannelsArea.set_visible(autoAssignArea.is_pressed())
+
 func _on_UseTemplate_Button_toggled(button_pressed):
 	var templatePathArea = get_node("VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/Template Path Area")
 	templatePathArea.set_visible(button_pressed)
@@ -43,6 +47,8 @@ func _on_UseTemplate_Button_toggled(button_pressed):
 	
 
 func _on_AutoAssign_Checkbox_toggled(button_pressed):
+	var useColorChannelsArea = get_node("VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/UseColorChannels")
+	useColorChannelsArea.set_visible(button_pressed)
 	autoAssing = button_pressed
 	print("set autoAssign to ", button_pressed)
 	

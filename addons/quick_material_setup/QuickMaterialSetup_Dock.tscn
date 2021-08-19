@@ -178,48 +178,9 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AutoAssing Area" type="HBoxContainer" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings"]
-margin_right = 264.0
-margin_bottom = 24.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Label4" type="Label" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/AutoAssing Area"]
-margin_right = 130.0
-margin_bottom = 24.0
-rect_min_size = Vector2( 0, 20 )
-hint_tooltip = "Do not try to match texture channels, just create one material per albedo texture"
-mouse_filter = 1
-size_flags_horizontal = 3
-size_flags_vertical = 5
-text = "Auto-assign maps"
-valign = 1
-
-[node name="AutoAssign_Checkbox" type="CheckBox" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/AutoAssing Area"]
-margin_left = 134.0
-margin_right = 264.0
-margin_bottom = 24.0
-hint_tooltip = "On: Assign textures to their material channel
-Off: Simply create a new material per texture, and assign textures  to albedo"
-size_flags_horizontal = 3
-pressed = true
-text = "On"
-
-[node name="Panel" type="Panel" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/AutoAssing Area/AutoAssign_Checkbox"]
-self_modulate = Color( 0, 0, 0, 0.156863 )
-show_behind_parent = true
-anchor_right = 1.0
-anchor_bottom = 1.0
-mouse_filter = 2
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
 [node name="UseTemplate Area" type="HBoxContainer" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings"]
-margin_top = 28.0
 margin_right = 264.0
-margin_bottom = 52.0
+margin_bottom = 24.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -253,10 +214,9 @@ __meta__ = {
 }
 
 [node name="Template Path Area" type="HBoxContainer" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings"]
-visible = false
-margin_top = 56.0
+margin_top = 28.0
 margin_right = 264.0
-margin_bottom = 78.0
+margin_bottom = 50.0
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -298,10 +258,49 @@ __meta__ = {
 }
 customIcon = "Folder"
 
-[node name="UseColorChannels" type="HBoxContainer" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings"]
-margin_top = 56.0
+[node name="AutoAssing Area" type="HBoxContainer" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings"]
+margin_top = 54.0
 margin_right = 264.0
-margin_bottom = 80.0
+margin_bottom = 78.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label4" type="Label" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/AutoAssing Area"]
+margin_right = 130.0
+margin_bottom = 24.0
+rect_min_size = Vector2( 0, 20 )
+hint_tooltip = "Do not try to match texture channels, just create one material per albedo texture"
+mouse_filter = 1
+size_flags_horizontal = 3
+size_flags_vertical = 5
+text = "Auto-assign maps"
+valign = 1
+
+[node name="AutoAssign_Checkbox" type="CheckBox" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/AutoAssing Area"]
+margin_left = 134.0
+margin_right = 264.0
+margin_bottom = 24.0
+hint_tooltip = "On: Assign textures to their material channel
+Off: Simply create a new material per texture, and assign textures  to albedo"
+size_flags_horizontal = 3
+pressed = true
+text = "On"
+
+[node name="Panel" type="Panel" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/AutoAssing Area/AutoAssign_Checkbox"]
+self_modulate = Color( 0, 0, 0, 0.156863 )
+show_behind_parent = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="UseColorChannels" type="HBoxContainer" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings"]
+margin_top = 82.0
+margin_right = 264.0
+margin_bottom = 106.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -335,9 +334,9 @@ __meta__ = {
 }
 
 [node name="ColorChannel_Area" type="VBoxContainer" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings"]
-margin_top = 84.0
+margin_top = 110.0
 margin_right = 264.0
-margin_bottom = 152.0
+margin_bottom = 178.0
 
 [node name="AO Area" type="HBoxContainer" parent="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/ColorChannel_Area"]
 margin_right = 264.0
@@ -503,9 +502,9 @@ __meta__ = {
 [connection signal="file_selected" from="FileDialog TemplateMat" to="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/Template Path Area" method="_on_FileDialog_TemplateMat_file_selected"]
 [connection signal="text_changed" from="VBoxContainer/Texture Path Area/LoadPath" to="VBoxContainer/Texture Path Area" method="_on_LoadPath_text_changed"]
 [connection signal="pressed" from="VBoxContainer/Texture Path Area/OpenButton" to="VBoxContainer/Texture Path Area" method="_on_OpenButton_pressed"]
-[connection signal="toggled" from="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/AutoAssing Area/AutoAssign_Checkbox" to="." method="_on_AutoAssign_Checkbox_toggled"]
 [connection signal="toggled" from="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/UseTemplate Area/UseTemplate_Button" to="." method="_on_UseTemplate_Button_toggled"]
 [connection signal="text_changed" from="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/Template Path Area/LoadPath" to="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/Template Path Area" method="_on_LoadPath_text_changed"]
 [connection signal="pressed" from="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/Template Path Area/OpenButton" to="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/Template Path Area" method="_on_OpenButton_pressed"]
+[connection signal="toggled" from="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/AutoAssing Area/AutoAssign_Checkbox" to="." method="_on_AutoAssign_Checkbox_toggled"]
 [connection signal="toggled" from="VBoxContainer/Options/ScrollContainer/MaterialProperties/Settings/UseColorChannels/UseColorChannel_Checkbox" to="." method="_on_UseColorChannel_Checkbox_toggled"]
 [connection signal="pressed" from="VBoxContainer/Create" to="." method="_on_Create_pressed"]
