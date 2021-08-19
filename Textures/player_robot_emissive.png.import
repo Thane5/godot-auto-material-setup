@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/player_robot_emissive.png-e7320ba2e0434b9fa5da227218326880.s3tc.stex"
-path.etc2="res://.import/player_robot_emissive.png-e7320ba2e0434b9fa5da227218326880.etc2.stex"
+path.s3tc="res://.import/player_robot_Emissive.png-d0dab827e31c06cae5092b33f9a99e17.s3tc.stex"
+path.etc2="res://.import/player_robot_Emissive.png-d0dab827e31c06cae5092b33f9a99e17.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Textures/player_robot_emissive.png"
-dest_files=[ "res://.import/player_robot_emissive.png-e7320ba2e0434b9fa5da227218326880.s3tc.stex", "res://.import/player_robot_emissive.png-e7320ba2e0434b9fa5da227218326880.etc2.stex" ]
+source_file="res://Textures/player_robot_Emissive.png"
+dest_files=[ "res://.import/player_robot_Emissive.png-d0dab827e31c06cae5092b33f9a99e17.s3tc.stex", "res://.import/player_robot_Emissive.png-d0dab827e31c06cae5092b33f9a99e17.etc2.stex" ]
 
 [params]
 
