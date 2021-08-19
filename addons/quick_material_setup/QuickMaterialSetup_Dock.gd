@@ -2,10 +2,10 @@ tool
 extends Control
 
 
-const SCALE_SUFFIX_ARRAY = ["_1K", "_2K", "_3K", "_4K", "_6K", "_8K", "_1k", "_2k", "_3k", "_4k", "_6k", "_8k"]
+const SCALE_SUFFIX_ARRAY = ["_1k", "_2k", "_3k", "_4k", "_6k", "_8k"]
 
-const ALBEDO_SUFFIX_ARRAY = ["_color", "_col", "_diffuse","_diff", "_albedo", "_base"]
-const NORMAL_SUFFIX_ARRAY = ["_normal", "_nor", "_nrm", "_norm", "_bump", "_bmp"]
+const ALBEDO_SUFFIX_ARRAY = ["_color", "_colour", "_col", "_diffuse", "_diff", "_albedo", "_base", "_basecolor", "_baseColor"]
+const NORMAL_SUFFIX_ARRAY = ["_normal", "_nor", "_nrm", "_norm", "_n", "_bump", "_bmp"]
 const METALLIC_SUFFIX_ARRAY = ["_metallic", "_metalness", "_metal", "_mtl"]
 const ROUGHNESS_SUFFIX_ARRAY = ["_roughness", "_rough", "_rgh", "_gloss", "_glossy", "_glossiness"]
 const EMISSION_SUFFIX_ARRAY = ["_emission","_emissive", "_em"]
@@ -24,12 +24,13 @@ var autoAssing = true
 var useTemplateMat = false
 var templateMatPath
 var useColorChannels = false
-var ao_Suffix = "_orm"
-var ao_channnel = 0 # Enum values go from 0-4
-var roughness_suffix = "_orm"
-var roughness_channel = 1
-var metallic_suffix = "_orm"
-var metallic_channel = 2
+
+export(NodePath) var ao_suffixPath
+export(NodePath) var ao_channnelPath
+export(NodePath) var roughness_suffixPath
+export(NodePath) var roughness_channelPath
+export(NodePath) var metallic_suffixPath
+export(NodePath) var metallic_channelPath
 
 #	Todo: Make channel variables pull actual values
 
@@ -37,10 +38,13 @@ var metallic_channel = 2
 func _enter_tree():
 
 	get_node(templatePathArea).set_visible(get_node(useTemplateButton).is_pressed())
+	useTemplateMat = get_node(useTemplateButton).is_pressed()
 	
 	get_node(colorChannelArea).set_visible(get_node(useColorChannelsCheckbox).is_pressed())
+	useColorChannels = get_node(useColorChannelsCheckbox).is_pressed()
 
 	get_node(useColorChannelsArea).set_visible(get_node(autoAssignCheckbox).is_pressed())
+	autoAssing = get_node(autoAssignCheckbox).is_pressed()
 
 func _on_UseTemplate_Button_toggled(button_pressed):
 	get_node(templatePathArea).set_visible(get_node(useTemplateButton).is_pressed())
@@ -56,17 +60,25 @@ func _on_AutoAssign_Checkbox_toggled(button_pressed):
 
 func _on_UseColorChannel_Checkbox_toggled(button_pressed):
 	get_node(colorChannelArea).set_visible(get_node(useColorChannelsCheckbox).is_pressed())
-	print("colorChannelArea -> ", button_pressed)
+	useColorChannels = button_pressed
+	print("useColorChannels -> ", button_pressed)
+
+
 
 func _on_Create_pressed():
+	
+	var ao_suffix = get_node(ao_suffixPath).text
+	var ao_channnel = get_node(ao_channnelPath).selected
+	var roughness_suffix = get_node(roughness_suffixPath).text
+	var roughness_channel = get_node(roughness_channelPath).selected
+	var metallic_suffix = get_node(metallic_suffixPath).text
+	var metallic_channel = get_node(metallic_channelPath).selected
 	
 	var currentMat
 	if useTemplateMat == true:
 		currentMat = load(templateMatPath).duplicate()
 	else:
 		currentMat = SpatialMaterial.new()
-
-
 
 
 	for path in currentResourcePaths:
@@ -82,13 +94,17 @@ func _on_Create_pressed():
 		# then erase the file ending from it
 		texName.erase(texName.find_last("."), texName.length()-texName.find_last("."))
 		
+		# make the name lowercase
+		texName = texName.to_lower()
+
 		
 		if autoAssing == true:
 			
-			var skipMatching = false
-			
+
+
 			#	Remove stupid scale suffixes because they would mess with my channel suffix detection
 			for scaleSuffix in SCALE_SUFFIX_ARRAY:
+				
 				if texName.ends_with(scaleSuffix) == true:
 					texName = texName.trim_suffix(scaleSuffix)
 					print("removed suffix ", scaleSuffix, " from Texture ", texName)
@@ -98,59 +114,61 @@ func _on_Create_pressed():
 				texName = texName.trim_suffix("_gl")
 				print("also removed _gl suffix from ", texName)
 
-				
-			if texName.ends_with(ao_Suffix):
-				
-				var matName = texName.trim_suffix(ao_Suffix)
-				var matPath = (workingDir + matName + ".tres")
-				
-				var dummyFile =  File.new() 
-				if dummyFile.file_exists(matPath) == true:
-					currentMat = load(matPath)
-					
-				skipMatching = true
-				
-				currentMat.ao_enabled = true
-				currentMat.ao_texture = load(path)
-				currentMat.ao_texture_channel = ao_channnel
-				
-				ResourceSaver.save(str(matPath), currentMat)
-				print(matPath)
-				
-				
-			if texName.ends_with(roughness_suffix):
-				
-				var matName = texName.trim_suffix(roughness_suffix)
-				var matPath = (workingDir + matName + ".tres")
-				
-				var dummyFile =  File.new() 
-				if dummyFile.file_exists(matPath) == true:
-					currentMat = load(matPath)
-					
-				skipMatching = true
-				
-				currentMat.roughness_texture = load(path)
-				currentMat.roughness_texture_channel = roughness_channel
-				
-				ResourceSaver.save(str(matPath), currentMat)
-				print(matPath)
 
-			if texName.ends_with(metallic_suffix):
-
-				var matName = texName.trim_suffix(metallic_suffix)
-				var matPath = (workingDir + matName + ".tres")
-				
-				var dummyFile =  File.new() 
-				if dummyFile.file_exists(matPath) == true:
-					currentMat = load(matPath)
+			var skipMatching = false
+			
+			if useColorChannels == true:
+			
+				if texName.ends_with(ao_suffix):
 					
-				skipMatching = true
-				
-				currentMat.metallic_texture = load(path)
-				currentMat.metallic_texture_channel = metallic_channel
-				
-				ResourceSaver.save(str(matPath), currentMat)
-				print(matPath)
+					var matName = texName.trim_suffix(ao_suffix)
+					var matPath = (workingDir + matName + ".tres")
+					
+					var dummyFile =  File.new() 
+					if dummyFile.file_exists(matPath) == true:
+						currentMat = load(matPath)
+						
+					skipMatching = true
+					
+					currentMat.ao_enabled = true
+					currentMat.ao_texture = load(path)
+					currentMat.ao_texture_channel = ao_channnel
+					
+					ResourceSaver.save(str(matPath), currentMat)
+					
+					
+					
+				if texName.ends_with(roughness_suffix):
+					
+					var matName = texName.trim_suffix(roughness_suffix)
+					var matPath = (workingDir + matName + ".tres")
+					
+					var dummyFile =  File.new() 
+					if dummyFile.file_exists(matPath) == true:
+						currentMat = load(matPath)
+						
+					skipMatching = true
+					
+					currentMat.roughness_texture = load(path)
+					currentMat.roughness_texture_channel = roughness_channel
+					
+					ResourceSaver.save(str(matPath), currentMat)
+
+				if texName.ends_with(metallic_suffix):
+
+					var matName = texName.trim_suffix(metallic_suffix)
+					var matPath = (workingDir + matName + ".tres")
+					
+					var dummyFile =  File.new() 
+					if dummyFile.file_exists(matPath) == true:
+						currentMat = load(matPath)
+						
+					skipMatching = true
+					
+					currentMat.metallic_texture = load(path)
+					currentMat.metallic_texture_channel = metallic_channel
+					
+					ResourceSaver.save(str(matPath), currentMat)
 			
 			# If this texture has just been assigned to a channel, skip this part
 			if skipMatching == false:
@@ -204,29 +222,35 @@ func _on_Create_pressed():
 					for albedoSuffix in ALBEDO_SUFFIX_ARRAY:
 						if texName.ends_with(albedoSuffix):
 							currentMat.albedo_texture = load(path)
+							print(texName, " identified as albedo texture")
 
 					for normalSuffix in NORMAL_SUFFIX_ARRAY:
 						if texName.ends_with(normalSuffix):
 							currentMat.normal_enabled = true
 							currentMat.normal_texture = load(path)
+							print(texName, " identified as normal map")
 
 					for metallicSuffix in METALLIC_SUFFIX_ARRAY:
 						if texName.ends_with(metallicSuffix):
 							currentMat.metallic_texture = load(path)
+							print(texName, " identified as metallic map")
 
 					for roughnessSuffix in ROUGHNESS_SUFFIX_ARRAY:
 						if texName.ends_with(roughnessSuffix):
 							currentMat.roughness_texture = load(path)
+							print(texName, " identified as roughness map")
 							
 					for emissionSuffix in EMISSION_SUFFIX_ARRAY:
 						if texName.ends_with(emissionSuffix):
 							currentMat.emission_enabled = true
 							currentMat.emission_texture = load(path)
+							print(texName, " identified as emission texture")
 					
 					for aoSuffix in AO_SUFFIX_ARRAY:
 						if texName.ends_with(aoSuffix):
 							currentMat.ao_enabled = true
 							currentMat.ao_texture = load(path)
+							print(texName, " identified as AO map")
 					
 
 				# finally, write the material to disk (happens for each texture but eh...
