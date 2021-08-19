@@ -54,6 +54,7 @@ func _on_UseTemplate_Button_toggled(button_pressed):
 
 func _on_AutoAssign_Checkbox_toggled(button_pressed):
 	get_node(useColorChannelsArea).set_visible(button_pressed)
+	get_node(colorChannelArea).set_visible(button_pressed)
 	autoAssing = button_pressed
 	print("autoAssign -> ", button_pressed)
 	

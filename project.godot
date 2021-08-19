@@ -20,7 +20,3 @@ enabled=PoolStringArray( "res://addons/quick_material_setup/plugin.cfg" )
 [physics]
 
 common/enable_pause_aware_picking=true
-
-[rendering]
-
-environment/default_environment="res://default_env.tres"
