@@ -10,12 +10,12 @@ config_version=4
 
 [application]
 
-config/name="Quick Material Setup"
-run/main_scene="res://addons/quick_material_setup/QuickMaterialSetup_Dock.tscn"
+config/name="Auto Material Setup"
+run/main_scene="res://addons/auto_material_setup/MaterialSetup_Dock.tscn"
 
 [editor_plugins]
 
-enabled=PoolStringArray( "res://addons/quick_material_setup/plugin.cfg" )
+enabled=PoolStringArray( "res://addons/auto_material_setup/plugin.cfg" )
 
 [physics]
 
